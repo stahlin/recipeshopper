@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        
+        <script>
+            var open = true;
+            var scriptTag = document.scripts[document.scripts.length - 1];
+            var parentTag = scriptTag.parentNode;
+            var title = $(parentTag).data("title");
+            var url = $(parentTag).data("url");
+            var description = $(parentTag).data("descr");
+            var split = $(parentTag).data("ingredients");
+            var ingredientsList = split.split(", ");
+            var ingredients = "";
+            for(var i = 0; i < ingredientsList.length; i++) {
+                ingredients += "<li>"+ingredientsList[i]+"</li>";
+            }
+
+            $(parentTag).append("<div class='recipeOutline' ng-app='myApp' ng-controller='myCtrl'><h2 class='recipeTitle'>"+title+" </h2><div class='recipeInline'><img class='recipeImage' src='"+url+"'/></div><h3> Description:</h3><p class='recipeDescription'>"+description+"</p><ul>"+ingredients+"</ul><div class='recipeButtonDiv'><button class='recipeButton'>Learn More</button></div></div>");   
+            
+            
+        </script>
+    </head>
+</html>
+<style>
+    .recipeOutline {
+        background-color: white;
+        margin: 50px;
+        padding: 30px;
+        padding-top: 0px;
+        width: 200px;
+        border-radius: 20px;
+        box-shadow: 0px 20px 40px 0px;
+    }
+    .recipeTitle {
+        margin: 0px;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .recipeInline {
+        background-color: firebrick;
+        width: 100%;
+        height: 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+    }
+    .recipeImage {
+        width: 90%;
+        height: 90%;
+        border-radius: 20px;
+    }
+    h3 {
+        font-size: 15px;
+    }
+    .recipeDescription {
+        font-size: 15px;
+    }
+    .recipeButtonDiv {
+        width: 100%;
+        height: 5%;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+    .recipeButton {
+        width: 50%;
+        height: 90%;
+        border-radius: 10px;
+        box-shadow: 0px 10px 10px 0px;
+    }
+    .recipeButton:hover {
+        box-shadow: 0px 15px 20px -5px;
+        transform: translate(0, -5px)
+    }
+    ul {
+        display: none;
+    }
+
+</style>

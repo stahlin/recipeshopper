@@ -1,0 +1,61 @@
+<html>
+    <body>
+        <div class="menu">
+            <div class="button" onclick="goTo('/')">Home</div>
+            <div class="button" onclick="goTo('addRecipe.html');">Add a Recipe</div>
+            <div class="button" onclick="goTo('creators.html');">creator</div>
+            <select class="dropdrownSelect" id="option">
+                <option value="title">Title</option>
+                <option value="ingredients">Ingredients</option>
+            </select>
+            <input id="searchBar">
+            <div class="button" onclick="search();">Search</div>
+        </div>
+    </body>
+</html>
+<style>
+    body {
+        margin: 0px;
+    }
+    .menu {
+        display: flex;
+        margin-top: 0px;
+    }
+    .button {
+        background-color: black;
+        padding: 10px;
+        color: white;
+        margin-left: 10px;
+        margin-top: 0px;
+    }
+    input {
+        margin-left: 10px;
+        width: 50%;
+    }
+    .dropdrownSelect {
+        margin-left: 10px;
+    }
+    
+
+</style>
+<script>
+    function goTo(link) {
+        window.location.assign(link);
+    }
+    function search() {
+        var sear = $('#searchBar').val();
+        var id = $('#option').val();
+         var arr = { id: id, search: sear};
+
+        $.ajax({
+                url: '/getDataBaseBySearch',
+                type: 'POST',
+                data: JSON.stringify(arr),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(msg) {
+                   console.log(msg);
+                }
+            });
+    }
+</script>

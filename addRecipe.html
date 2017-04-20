@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Recipe Shopper</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="addRecipe.js"></script>
+        <script src="loadMenu.js"></script>
+    </head>
+    <body>
+        <div>
+            <div id="menu"></div>
+            <div style="margin:200px; display:flex;">
+                <table>
+                    <tr>
+                        <td><label>Title: </label></td>
+                        <td><input class="input" id="title"></td>
+                    </tr>
+                    <tr>
+                        <td><label>URL: </label></td>
+                        <td><input class="input" id="url"></td>
+                    </tr>
+                    <tr>
+                        <td><label>Description: </label></td>
+                        <td><input class="input" id="description"></td>
+                    </tr>
+                    <tr>
+                        <td><label>Ingredients:<br> (Seperate by comma) </label></td>
+                        <td><input class="input ingredients" style="height: 100px;" id="ingredients"></td>
+                    </tr>
+                </table>
+                <button class="clicker">Load New Recipe</button>
+
+            </div>
+        </div>
+    </body>
+
+</html>
+<style>
+    body{
+        margin: 0px;
+        background-color: darkmagenta;
+    }
+    .recipeDisplay {
+        display: inline-flex;
+        align-items: center;
+    }
+    .input {
+        width: 300px;
+    }
+    .ingredients {
+        padding-top: 0px;
+    }
+</style>
