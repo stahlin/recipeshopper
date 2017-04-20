@@ -16,9 +16,26 @@
                 ingredients += "<li>"+ingredientsList[i]+"</li>";
             }
 
-            $(parentTag).append("<div class='recipeOutline' ng-app='myApp' ng-controller='myCtrl'><h2 class='recipeTitle'>"+title+" </h2><div class='recipeInline'><img class='recipeImage' src='"+url+"'/></div><h3> Description:</h3><p class='recipeDescription'>"+description+"</p><ul>"+ingredients+"</ul><div class='recipeButtonDiv'><button class='recipeButton'>Learn More</button></div></div>");   
+            $(parentTag).append("<div class='recipeOutline' ng-app='myApp' ng-controller='myCtrl'><h2 class='recipeTitle'>"+title+" </h2><div class='recipeInline'><img class='recipeImage' src='"+url+"'/></div><h3> Description:</h3><p class='recipeDescription'>"+description+"</p><ul>"+ingredients+"</ul><div class='recipeButtonDiv'><button get="+title+" onclick='buttonClicked(this);' class='recipeButton'>Learn More</button></div></div>");   
             
-            
+            function buttonClicked(getThis) {
+                var newTitle = $(getThis).attr('get');
+                var arr = { id: "", search: 'newTitle', collection: "learnmore"};
+
+                $.ajax({
+                    url: '/getDataBaseBySearch',
+                    type: 'POST',
+                    data: JSON.stringify(arr),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(msg) {
+                        $('html').prepend("<div onclick='closeLearnMore()' class='learnMore' style='position: fixed; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;'><div style='background-color: white; margin-top: 10px; margin-left: 10px; margin-right: 10px; position: fixed; min-width: 90%; height: 90%; z-index: 100;'></div></div>");
+                    }
+                });
+            }
+            function closeLearnMore() {
+                $('.learnMore').remove();
+            }
         </script>
     </head>
 </html>

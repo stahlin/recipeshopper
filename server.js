@@ -1,5 +1,7 @@
 (function() {
     "use strict";
+    var express= require('express');
+    var app = express();
     
     var start = function() {
         setUpExpress();  
@@ -8,9 +10,6 @@
     
     
     var setUpExpress = function() {
-        var express= require('express');
-        var app = express();
-        
         app.use('/', express.static(__dirname));
         app.get('/Creators', function(req, res) {
            res.sendFile(__dirname + '\\creators.html'); 
@@ -28,10 +27,11 @@
         var recipeScheme = mongoose.Schema({
             title: String, 
             url: String, 
-            description: String 
+            description: String,
+            ingredients: String
         });
         
-        var recipeModel = mongoose.model('recipe', );
+        var recipeModel = mongoose.model('recipe',recipeScheme );
         var querry = mongoose.model('recipe');
         var bodyParser = require('body-parser')
         app.use(bodyParser.json());
@@ -67,6 +67,9 @@
             } else if (id === "ingredients") {
                 sort = {ingredients: sear};
                 collection = "ingredients";
+            } else {
+                sort = {title: sear};
+                collection = req.body.collection;
             }
             console.log(sort);
             mongoose.connection.db.collection(collection, function (err, collection) {
