@@ -1,11 +1,16 @@
 (function() {
     "use strict";
-    var express= require('express');
-    var app = express();
-    var mongoose = require('mongoose');
-    mongoose.connect('mongodb://localhost/test');
     
     var start = function() {
+        setUpExpress();  
+        dealWithMongo();
+    };
+    
+    
+    var setUpExpress = function() {
+        var express= require('express');
+        var app = express();
+        
         app.use('/', express.static(__dirname));
         app.get('/Creators', function(req, res) {
            res.sendFile(__dirname + '\\creators.html'); 
@@ -14,10 +19,20 @@
             console.log("server running.");
         });
         
+    };
+     
+    var dealWithMongo = function() {
+        var mongoose = require('mongoose');
+        mongoose.connect('mongodb://localhost/test');
+        
+        
+        
         var recipeModel = mongoose.model('recipe', {title: String, url: String, description: String, ingredients: String});
         var querry = mongoose.model('recipe');
         var bodyParser = require('body-parser')
         app.use(bodyParser.json());
+        
+        
         app.post("/addToDB", function (req, res) {
             console.log(req.body);
             
@@ -52,9 +67,7 @@
                     res.send(results);
                 });
             });
-            //res.send(arr);
         });
-        
     };
     
    start();
