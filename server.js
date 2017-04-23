@@ -25,20 +25,34 @@
         mongoose.connect('mongodb://localhost/test');
         
         var recipeScheme = mongoose.Schema({
+            collect: String,
             title: String, 
             url: String, 
             description: String,
-            ingredients: String
+        });
+        var moreScheme = mongoose.Schema({
+            collect: String,
+            title: String, 
+            description: String,
+            ingredients: String,
+            direction: String
         });
         
         var recipeModel = mongoose.model('recipe',recipeScheme );
+        var moreModel = mongoose.model('learnmore',moreScheme );
+
         var querry = mongoose.model('recipe');
         var bodyParser = require('body-parser')
         app.use(bodyParser.json());
         
         //Code to add a recipe to the database
         app.post("/addToDB", function (req, res) {
-            var rec = new recipeModel(req.body);
+            var rec = "";
+            if (req.body.collect === "learnmores") {
+                var rec = new moreModel(req.body);
+            } else {
+                var rec = new recipeModel(req.body);
+            }
             rec.save(function(err, rec) {
                if (err) return console.error(err); 
             });
@@ -70,6 +84,7 @@
             } else {
                 sort = {title: sear};
                 collection = req.body.collection;
+                console.log("colect : " + collection);
             }
             console.log(sort);
             mongoose.connection.db.collection(collection, function (err, collection) {

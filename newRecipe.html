@@ -9,18 +9,15 @@
             var title = $(parentTag).data("title");
             var url = $(parentTag).data("url");
             var description = $(parentTag).data("descr");
-            var split = $(parentTag).data("ingredients");
-            var ingredientsList = split.split(", ");
             var ingredients = "";
-            for(var i = 0; i < ingredientsList.length; i++) {
-                ingredients += "<li>"+ingredientsList[i]+"</li>";
-            }
 
-            $(parentTag).append("<div class='recipeOutline' ng-app='myApp' ng-controller='myCtrl'><h2 class='recipeTitle'>"+title+" </h2><div class='recipeInline'><img class='recipeImage' src='"+url+"'/></div><h3> Description:</h3><p class='recipeDescription'>"+description+"</p><ul>"+ingredients+"</ul><div class='recipeButtonDiv'><button get="+title+" onclick='buttonClicked(this);' class='recipeButton'>Learn More</button></div></div>");   
+
+            $(parentTag).append("<div class='recipeOutline' ng-app='myApp' ng-controller='myCtrl'><h2 class='recipeTitle'>"+title+" </h2><div class='recipeInline'><img class='recipeImage' src='"+url+"'/></div><h3> Description:</h3><p class='recipeDescription'>"+description+"</p><div class='recipeButtonDiv'><button get="+title+" onclick='buttonClicked(this);' class='recipeButton'>Learn More</button></div></div>");   
             
             function buttonClicked(getThis) {
                 var newTitle = $(getThis).attr('get');
-                var arr = { id: "", search: 'newTitle', collection: "learnmore"};
+                console.log(newTitle);
+                var arr = { id: "", search: newTitle, collection: "learnmores"};
 
                 $.ajax({
                     url: '/getDataBaseBySearch',
@@ -29,7 +26,8 @@
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function(msg) {
-                        $('html').prepend("<div onclick='closeLearnMore()' class='learnMore' style='position: fixed; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;'><div style='background-color: white; margin-top: 10px; margin-left: 10px; margin-right: 10px; position: fixed; min-width: 90%; height: 90%; z-index: 100;'></div></div>");
+                        console.log(msg[0]);
+                        $('html').prepend("<div onclick='closeLearnMore()' class='learnMore' style='position: fixed; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;'><div style='background-color: white; margin-top: 10px; margin-left: 10px; margin-right: 10px; position: fixed; min-width: 90%; height: 90%; z-index: 100;'><h1 style='text-align: center;'>Title: "+msg[0].title+"</h1><label>Directions: </label><p>"+msg[0].directions+"</p></div></div>");
                     }
                 });
             }

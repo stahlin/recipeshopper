@@ -18,7 +18,7 @@
             });
     };
     var newRecipe = function(title, url, descr, ingred) {
-        $('#recipes').append($("<div>").load("newRecipe.html", function() {}).data("title", title).data("url", url).data("descr", descr).data("ingredients", ingred));
+        $('#recipes').append($("<div>").load("newRecipe.html", function() {}).data("title", title).data("url", url).data("descr", descr));
     };
     
    
