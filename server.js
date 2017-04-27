@@ -22,7 +22,10 @@
      
     var dealWithMongo = function() {
         var mongoose = require('mongoose');
-        mongoose.connect('mongodb://localhost/test');
+        //Official Database
+        mongoose.connect('mongodb://Server:server@ds113841.mlab.com:13841/recipes');
+        //Testing Database
+        //mongoose.connect('mongodb://localhost/test');
         
         var recipeScheme = mongoose.Schema({
             collect: String,

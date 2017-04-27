@@ -12,7 +12,7 @@
             var ingredients = "";
 
 
-            $(parentTag).append("<div class='recipeOutline' ng-app='myApp' ng-controller='myCtrl'><h2 class='recipeTitle'>"+title+" </h2><div class='recipeInline'><img class='recipeImage' src='"+url+"'/></div><h3> Description:</h3><p class='recipeDescription'>"+description+"</p><div class='recipeButtonDiv'><button get="+title+" onclick='buttonClicked(this);' class='recipeButton'>Learn More</button></div></div>");   
+            $(parentTag).append("<div class='recipeOutline' ng-app='myApp' ng-controller='myCtrl'><h2 class='recipeTitle'>"+title+" </h2><div class='recipeInline'><img class='recipeImage' src='"+url+"'/></div><h3> Description:</h3><p class='recipeDescription'>"+description+"</p><div class='recipeButtonDiv'><button get='"+title+"' onclick='buttonClicked(this);' class='recipeButton'>Learn More</button></div></div>");   
             
             function buttonClicked(getThis) {
                 var newTitle = $(getThis).attr('get');
@@ -27,7 +27,13 @@
                     dataType: 'json',
                     success: function(msg) {
                         console.log(msg[0]);
-                        $('html').prepend("<div onclick='closeLearnMore()' class='learnMore' style='position: fixed; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;'><div style='background-color: white; margin-top: 10px; margin-left: 10px; margin-right: 10px; position: fixed; min-width: 90%; height: 90%; z-index: 100;'><h1 style='text-align: center;'>Title: "+msg[0].title+"</h1><label>Directions: </label><p>"+msg[0].directions+"</p></div></div>");
+                        var ingredients = "";
+                        var ingredientList = msg[0].ingredients.split(',');
+                        for (var i = 0; i < ingredientList.length; i++) {
+                            ingredients += "<li>" + ingredientList[i] + "</li>";
+                        }
+                        
+                        $('html').prepend("<div onclick='closeLearnMore()' class='learnMore'><div class='popupBox'><h1 style='text-align: center;'>Title: "+msg[0].title+"</h1><h2>Directions: </h2><p>"+msg[0].description+"</p><h2>Ingredients: </h2><ul>"+ingredients+"</ul><h2>Directions: </h2><p>"+msg[0].direction+"</p></div></div>");
                     }
                 });
             }
@@ -90,8 +96,27 @@
         box-shadow: 0px 15px 20px -5px;
         transform: translate(0, -5px)
     }
-    ul {
-        display: none;
+    .learnMore {
+        position: fixed; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        width: 100%; 
+        height: 100%;
+
+    }
+    .popupBox {
+        background-color: white; 
+        margin-top: 10px; 
+        margin-left: 10px; 
+        margin-right: 10px; 
+        position: fixed; 
+        min-width: 90%; 
+        height: 90%; 
+        z-index: 100;
+        box-shadow: 10px 0 10px 10px;
+        overflow-y: scroll;
+
     }
 
 </style>
