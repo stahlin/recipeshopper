@@ -1,4 +1,7 @@
 <html>
+	<head>
+		<script src="loadItems.js"></script>
+	</head>
     <body>
         <div class="menu">
             <div class="button" onclick="goTo('/')">Home</div>
@@ -57,6 +60,23 @@
                 dataType: 'json',
                 success: function(msg) {
                    console.log(msg);
+				   for (var i = 0; i < msg.length; i++) {
+					searchfromLearn(msg[i].title);
+				   }
+                }
+            });
+    }
+	function searchfromLearn(sear) {
+         var arr = { id: "title", search: sear};
+
+        $.ajax({
+                url: '/getDataBaseBySearch',
+                type: 'POST',
+                data: JSON.stringify(arr),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(msg) {
+				   loadSearchedItems(msg);
                 }
             });
     }

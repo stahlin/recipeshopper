@@ -79,11 +79,11 @@
             var collection = "";
             var sort = {};
             if (id === "title") {
-                sort = {title: sear};
+                sort = {title: {$regex : sear}};
                 collection = "recipes";
             } else if (id === "ingredients") {
-                sort = {ingredients: sear};
-                collection = "ingredients";
+                sort = {ingredients: {$regex : sear}};
+                collection = "learnmores";
             } else {
                 sort = {title: sear};
                 collection = req.body.collection;
