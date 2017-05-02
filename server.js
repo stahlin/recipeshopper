@@ -40,9 +40,15 @@
             ingredients: String,
             direction: String
         });
+		var userScheme = mongoose.Schema({
+            username: String,
+			password: String,
+			favorites: [String]
+        });
         
         var recipeModel = mongoose.model('recipe',recipeScheme );
         var moreModel = mongoose.model('learnmore',moreScheme );
+		var userModel = mongoose.model('user',userScheme );
 
         var querry = mongoose.model('recipe');
         var bodyParser = require('body-parser')
@@ -97,6 +103,32 @@
                 });
             });
         });
+		
+		
+		//return array when you search for a title
+        app.post("/addUser", function (req, res) { 
+            var user = new userModel(req.body);
+			user.save(function(err, rec) {
+               if (err) return console.error(err); 
+            });
+            res.send('complete');
+        });
+		
+		//return array when you search for a title
+        app.post("/findUser", function (req, res) { 
+			var sort = {username: req.body.username, password: req.body.password};
+            mongoose.connection.db.collection("users", function (err, collection) {
+                collection.find(sort).toArray(function(err, results) {
+                    if (results != []) {
+						res.send(true);
+					} else {
+						res.send(false);
+					}
+                });
+            });
+        });
+		
+		
     };
     
    start();
