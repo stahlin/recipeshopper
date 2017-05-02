@@ -1,0 +1,30 @@
+<html>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    
+    <div ng-app="app" ng-controller="controller">
+        Username <br>
+        <input type="text" ng-model="username"> <br>
+        Password <br>
+        <input type="password" ng-model="password"> <br>
+        <input type="button" value="login" ng-click="login()">
+        
+    </div>
+    
+    <script>
+        var app = angular.module("app", []);
+        app.controller("controller", function($scope){
+            $scope.login = function(){
+                if($scope.username == "admin" && $scope.password =="pass"){
+                    alert("Welcome");
+                    window.location.href = "page2.html";
+                }
+                else{
+                    alert("Incorrect username or password");
+                }
+            }
+        });
+    </script>
+    
+    
+</html>
