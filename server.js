@@ -111,7 +111,7 @@
 			user.save(function(err, rec) {
                if (err) return console.error(err); 
             });
-            res.send('complete');
+            res.send(true);
         });
 		
 		//return array when you search for a title
