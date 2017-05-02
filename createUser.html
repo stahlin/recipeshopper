@@ -2,16 +2,14 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     
-    
     <div ng-app="app" ng-controller="controller">
+        Create A New Account <br>
         Username <br>
         <input type="text" ng-model="username"> <br>
         Password <br>
-        <input type="password" ng-model="password"> <br>
-        <input type="button" value="login" ng-click="login()">
-        <form action="createUser.html">
-            <input type="submit" value="Create Account">
-        </form>
+        <input type="text" ng-model="password"> <br>
+        
+        <input type="button" value="Create Account" ng-click="login()">
         
     </div>
     
@@ -19,22 +17,22 @@
         var app = angular.module("app", []);
         app.controller("controller", function($scope){
             $scope.login = function(){
+                //javascript goes here
                 
-                if(call($scope.username, $scope.password);){
-                    window.location.href = "index.html";
-                }
-                else{
-                    alert("Incorrect username or password")
+                if(add(&scope.username, $scope.password)){
+                    alert("User Creation Successful");
+                    window.location.href = "login.html";
+
                 }
             }
         });
         
-        function call(username, password){
+        function add(username, password){
             
             var arr = [username: username, password: password];
             
             $.ajax({
-                url: '/findUser',
+                url: '/addUser',
                 type: 'POST',
                 data: JSON.stringify(arr),
                 contentType: 'application/json; charset=utf-8',
