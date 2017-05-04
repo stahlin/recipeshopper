@@ -1,48 +1,11 @@
 <html>
-	<head>
-		<script src="loadItems.js"></script>
-	</head>
-    <body>
-        <div class="menu">
-            <div class="button" onclick="goTo('/')">Home</div>
-            <div class="button" onclick="goTo('addRecipe.html');">Add a Recipe</div>
-            <div class="button" onclick="goTo('creators.html');">creator</div>
-            <select class="dropdrownSelect" id="option">
-                <option value="title">Title</option>
-                <option value="ingredients">Ingredients</option>
-            </select>
-            <input id="searchBar">
-            <div class="button" onclick="search();">Search</div>
-        </div>
-    </body>
-</html>
-<style>
-    body {
-        margin: 0px;
-    }
-    .menu {
-        display: flex;
-        margin-top: 0px;
-        position: fixed;
-        width: 100%;
-    }
-    .button {
-        background-color: black;
-        padding: 10px;
-        color: white;
-        margin-left: 10px;
-        margin-top: 0px;
-    }
-    input {
-        margin-left: 10px;
-        width: 50%;
-    }
-    .dropdrownSelect {
-        margin-left: 10px;
-    }
-    
-
-</style>
+    <head>
+        <title>Recipe Shopper</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="custom.css" rel="stylesheet" type="text/css" media="screen">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script>
     function goTo(link) {
         window.location.assign(link);
@@ -81,3 +44,62 @@
             });
     }
 </script>
+    </head>
+    <body>
+            <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">RecipeShopper</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li class="active"><a href="addRecipe.html">Add a Recipe</a></li>
+                <li class="active"><a href="creators.html">Creators</a></li>
+                <li class="active">
+                    <select class="dropdrownSelect" id="option">
+                        <option value="title">Title</option>
+                        <option value="ingredients">Ingredients</option>
+                    </select></li>
+            </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search" id="searchBar">
+                    </div>
+                <button class="btn btn-info navbar-btn" onclick="search();">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="createUser.html"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+            <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    </body>
+</html>
+<style>
+    body {
+        margin: 0px;
+    }
+    .menu {
+        display: block;
+        margin-top: 0px;
+        position: fixed;
+        width: 100%;
+    }
+    .button {
+        background-color: black;
+        padding: 10px;
+        color: white;
+        margin-left: 10px;
+        margin-top: 0px;
+    }
+    input {
+        margin-left: 10px;
+        width: 50%;
+    }
+    .dropdrownSelect {
+        margin-left: 10px;
+    }
+    .glyphicon {
+        padding-top: 10;
+    }
+</style>
