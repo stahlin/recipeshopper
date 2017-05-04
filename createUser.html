@@ -1,17 +1,16 @@
-<html>
-    
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>RecipeShopper Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="custom.css" rel="stylesheet" type="text/css" media="screen">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     
-    <div ng-app="app" ng-controller="controller">
-        Create A New Account <br>
-        Username <br>
-        <input type="text" ng-model="username"> <br>
-        Password <br>
-        <input type="text" ng-model="password"> <br>
-        
-        <input type="button" value="Create Account" ng-click="login()">
-        
-    </div>
+    
     
     <script>
         var app = angular.module("app", []);
@@ -43,6 +42,24 @@
             });
         }
     </script>
+    </head>
+    <body>
     
-    
+    <div ng-app="app" ng-controller="controller">
+        <h1>Create A New Account </h1>
+        <h4>Username</h4>
+        <input type="text" ng-model="username"> <br>
+        <h4>Password</h4>
+        <input type="text" ng-model="password"> <br>
+        
+        <input type="button" class="btn btn-warning" value="Create Account" ng-click="login()">
+        
+    </div>
+    </body>
+    <style>
+    div {
+    background-color: cadetblue;
+    height: 20;
+    padding: 2;
+}</style>
 </html>
